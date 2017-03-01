@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using VRTK;
 
 public class GameController : MonoBehaviour {
 
-	public TextMesh scoreText;
+	public Text scoreText;
 	public int score;
 
 	// Use this for initialization
@@ -21,7 +23,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col) {
-    if (col.gameObject.tag == "Target") {
+		Debug.Log("test");
+    if (col.gameObject.tag == "Basketball") {
 			AddScore(20);
 		}
 	}
@@ -33,6 +36,6 @@ public class GameController : MonoBehaviour {
 	}
 
 	void UpdateScore () {
-		scoreText.text = "Score: " + score;
+		scoreText.text = score.ToString();
 	}
 }
