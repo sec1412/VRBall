@@ -7,6 +7,7 @@ public class ControllerMenu : MonoBehaviour {
 
 	public GameObject basketball;
 	private int ballCount;
+	private GameObject newBall;
 	public VRTK_InteractGrab grabbingController;
 
 
@@ -21,13 +22,20 @@ public class ControllerMenu : MonoBehaviour {
 	}
 
 	public void SpawnBall () {
-		if (ballCount != 500) {
-		GameObject newBall = Instantiate(basketball, grabbingController.transform.position, Quaternion.identity) as GameObject;
+		if (ballCount != 5) {
+		newBall = Instantiate(basketball, grabbingController.transform.position, Quaternion.identity) as GameObject;
 		newBall.transform.parent = null;
 		newBall.name = "BasketballClone";
 		grabbingController.GetComponent<VRTK_InteractTouch>().ForceTouch(newBall);
 		grabbingController.AttemptGrab();
 		ballCount += 1;
+		} else {
+			Destroy(newBall);
+			ballCount -= 1;
 		}
+	}
+
+	public void AdjustThrowSpeed () {
+
 	}
 }
