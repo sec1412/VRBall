@@ -7,13 +7,22 @@ using VRTK;
 public class GameController : MonoBehaviour {
 
 	public Text scoreText;
-	public int score;
+	public Text scoreMultiplierText;
+	public Text bonusTimeText;
+	private float score;
+	private float bonusTime;
+	private float scoreMultiplier;
 
 	// Use this for initialization
 	void Start () {
 
 		score = 0;
+		scoreMultiplier = 1;
+		bonusTime = 0;
 		UpdateScore();
+		UpdateBonusTime();
+		UpdateScoreMultiplier();
+		InvokeRepeating ("BonusTimer", 1.0f, 1.0f);
 
 	}
 
@@ -25,11 +34,15 @@ public class GameController : MonoBehaviour {
 	void OnTriggerEnter(Collider col) {
 		Debug.Log("test");
     if (col.gameObject.tag == "Basketball") {
-			AddScore(20);
+			AddScore(20f * scoreMultiplier);
+			scoreMultiplier += 0.5f;
+			UpdateScoreMultiplier();
+			bonusTime = 20f;
+
 		}
 	}
 
-	public void AddScore (int scoreValue) {
+	public void AddScore (float scoreValue) {
 		score += scoreValue;
 		UpdateScore();
 
@@ -37,5 +50,25 @@ public class GameController : MonoBehaviour {
 
 	void UpdateScore () {
 		scoreText.text = score.ToString();
+	}
+
+	void UpdateBonusTime () {
+		bonusTimeText.text = bonusTime.ToString();
+	}
+
+	void UpdateScoreMultiplier () {
+		scoreMultiplierText.text = scoreMultiplier.ToString();
+	}
+
+	void BonusTimer () {
+		if (bonusTime != 0) {
+		if (--bonusTime == 0) {
+			scoreMultiplier = 1;
+			UpdateScoreMultiplier();
+			//CancelInvoke ("BonusTimer");
+
+		}
+		UpdateBonusTime();
+		}
 	}
 }
