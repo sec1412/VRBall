@@ -9,8 +9,6 @@ public class ControllerMenu : MonoBehaviour {
 	public GameObject basketball;
 	public Text throwSpeed;
 	public Color[] colors;
-	public Renderer mesh1;
-	public Renderer mesh2;
 	private float speed;
 	private int ballCount;
 	private float maxSpeed;
