@@ -8,6 +8,9 @@ public class ControllerMenu : MonoBehaviour {
 
 	public GameObject basketball;
 	public Text throwSpeed;
+	public Color[] colors;
+	public Renderer mesh1;
+	public Renderer mesh2;
 	private float speed;
 	private int ballCount;
 	private float maxSpeed;
@@ -60,6 +63,17 @@ public class ControllerMenu : MonoBehaviour {
 
 	void UpdateThrowSpeed () {
 		throwSpeed.text = speed.ToString();
+	}
+
+	public void ChangeColor () {
+		var cIndex = Random.Range(0, colors.Length);
+		foreach (Renderer r in newBall.GetComponentsInChildren<Renderer>()) {
+			foreach (Material m in r.materials) {
+				if (m.name == "Material (Instance)") {
+					r.material.color = colors[cIndex];
+				}
+			}
+		}
 	}
 
 }
