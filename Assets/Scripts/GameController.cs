@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	public Text scoreMultiplierText;
 	public Text bonusTimeText;
-	private float score;
+	public float score;
 	private float bonusTime;
 	private float scoreMultiplier;
 
@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour {
 
 	}
 
-	void UpdateScore () {
+	public void UpdateScore () {
 		scoreText.text = score.ToString();
 	}
 
