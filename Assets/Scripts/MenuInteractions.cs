@@ -33,9 +33,11 @@ public class MenuInteractions : MonoBehaviour {
 		if (defaultTips == true) {
 			leftTips.ToggleTips(false);
 			rightTips.ToggleTips(false);
+			defaultTips = false;
 		} else {
 			leftTips.ToggleTips(true);
 			rightTips.ToggleTips(true);
+			defaultTips = true;
 		}
 	}
 }
